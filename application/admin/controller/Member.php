@@ -58,6 +58,26 @@ class Member extends Base
         return $this->fetch();
     }
 
+    public function edit(){
+        $m=new \app\admin\model\Member();
+        $member=$m->getMemberById(input('param.id'));
+        if(request()->isPost()) {
+            $param = input('post.');
+            $validate = new MemberValidate();
+            if(!$validate->scene('edit')->check($param)) {
+                return ['code' => -1, 'data' => '', 'msg' => $validate->getError()];
+            }
+            if (empty($param['password'])||$param['password']=='')
+                $param['password'] = makePassword($param['password']);
+            else
+                unset($param['password']);//密码为空则不更新密码
+            unset($param['username']);//用户名不允许更改
+            $res = $m->editMember($param);
+            return json($res);
+        }
+        return $this->assign('member',$member)->fetch();
+    }
+
     /**
      * 会员删除
      * @return \think\response\Json

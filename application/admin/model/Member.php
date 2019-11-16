@@ -33,8 +33,16 @@ class Member extends Model
         return modelReMsg(0,$ls,'ok');
     }
 
-    public function getMemberById(){
-
+    /**
+     * 获取单个会员信息
+     * @param $id
+     * @return array|\PDOStatement|string|Model|null
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function getMemberById($id){
+        return self::where('member_id',$id)->find();
     }
 
     /**
@@ -52,7 +60,11 @@ class Member extends Model
         return modelReMsg(-1, '', '添加会员失败');
     }
 
-    public  function editMember(){
+    public  function editMember($data){
+        $edit = self::save($data,['member_id'=>$data['member_id']]);
+        if ($edit)
+            return modelReMsg(0, '', '修改成功');
+        return modelReMsg(-1, '', '修改失败');
     }
 
     /**
