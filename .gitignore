@@ -3,4 +3,4 @@
 *.log
 .env
 .DS_Store
-/rumtime
+/rumtime/

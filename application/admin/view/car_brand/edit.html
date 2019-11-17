@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>编辑角色</title>
+    <title>编辑品牌</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -17,12 +17,12 @@
             <div class="layui-card">
                 <div class="layui-card-body">
                     <form class="layui-form" action="" lay-filter="component-form-element">
-                        <input type="hidden" value="{$t['type_id']}" name="type_id"/>
+                        <input type="hidden" value="{$t['brand_id']}" name="brand_id"/>
                         <div class="layui-row layui-col-space10 layui-form-item">
                             <div class="layui-col-lg6">
-                                <label class="layui-form-label">类型名称：</label>
+                                <label class="layui-form-label">品牌名称：</label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="type_name" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" value="{$t['type_name']}">
+                                    <input type="text" name="brand_name" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" value="{$t['brand_name']}">
                                 </div>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
         var $ = layui.$
             ,form = layui.form;
         form.on('submit(component-form-element)', function(data){
-            $.post("{:url('car_type/edit')}", data.field, function (res) {
+            $.post("{:url('car_brand/edit')}", data.field, function (res) {
                 if(0 == res.code) {
                     layer.msg(res.msg);
                     setTimeout(function () {

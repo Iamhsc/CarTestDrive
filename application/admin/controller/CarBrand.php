@@ -9,27 +9,26 @@
 namespace app\admin\controller;
 
 
-use app\admin\validate\CarTypeValidate;
+use app\admin\validate\CarBrandValidate;
 
-class CarType extends Base
+class CarBrand extends Base
 {
     /**
-     * 获取车辆类型列表
+     * 获取车辆品牌列表
      * @return mixed|\think\response\Json
      * @throws \think\exception\DbException
      */
     public function index(){
         if (request()->isAjax()) {
             $limit = input('param.limit');
-            $type_name = input('param.type_name');
+            $brand_name = input('param.brand_name');
 
             $where=[];
-            $where[] = ['is_del','=',0];
-            if (!empty($type_name)) {
-                $where[] = ['type_name', 'like', '%'.$type_name.'%'];
+            if (!empty($brand_name)) {
+                $where[] = ['brand_name', 'like', '%'.$brand_name.'%'];
             }
-            $model=new \app\admin\model\CarType();
-            $ls=$model->getCarTypeList($limit,$where);
+            $model=new \app\admin\model\CarBrand();
+            $ls=$model->getCarBrandList($limit,$where);
             if ($ls['code']===0)
                 return json(['code' => 0, 'msg' => 'ok', 'count' => $ls['data']->total(), 'data' => $ls['data']->all()]);
             else
@@ -39,49 +38,53 @@ class CarType extends Base
     }
 
     /**
-     * 添加车辆类型
+     * 添加车辆品牌
      * @return mixed|\think\response\Json
      */
     public function add(){
         if(request()->isPost()) {
             $param = input('post.');
-            $model=new \app\admin\model\CarType();
-            $res = $model->addCarType($param);
+            $model=new \app\admin\model\CarBrand();
+            $res = $model->addCarBrand($param);
             return json($res);
         }
         return $this->fetch();
     }
 
     /**
-     * 编辑车辆类型
+     * 编辑车辆品牌
      * @return array|mixed|\think\response\Json
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
     public  function edit(){
-        $model=new \app\admin\model\CarType();
-        $type=$model->getCarTypeById(input('param.id'));
+        $model=new \app\admin\model\CarBrand();
+        $brand=$model->getCarBrandById(input('param.id'));
         if(request()->isPost()) {
             $param = input('post.');
-            $validate = new CarTypeValidate();
+            $validate = new CarBrandValidate();
             if(!$validate->check($param)) {
                 return ['code' => -1, 'data' => '', 'msg' => $validate->getError()];
             }
-            $res = $model->editCarType($param);
+            $res = $model->editCarBrand($param);
             return json($res);
         }
-        return $this->assign('t',$type)->fetch();
+        return $this->assign('t',$brand)->fetch();
     }
 
     /**
-     * 删除车辆类型
+     * 删除车辆品牌
      * @return \think\response\Json
      */
     public function del(){
         $param=$this->request->param();
-        $model=new \app\admin\model\CarType();
-        $del=$model->delCarType($param['id']);
+        $id=$param['id'];
+        $car=new \app\admin\model\Car();
+        if ($car->getCountByBrandId($id)>0)
+            return json(['code' => -1, 'msg' => '必须先删除该品牌所有车辆', 'count' => 0, 'data' => []]);
+        $model=new \app\admin\model\CarBrand();
+        $del=$model->delCarBrand($id);
         if($del)
             return json(['code' => 0, 'msg' => '删了成功', 'count' => 0, 'data' => []]);
         return json(['code' => -1, 'msg' => '删了失败', 'count' => 0, 'data' => []]);

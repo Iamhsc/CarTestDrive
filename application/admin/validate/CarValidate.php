@@ -11,13 +11,13 @@ namespace app\admin\validate;
 
 use think\Validate;
 
-class CarTypeValidate extends Validate
+class CarValidate extends Validate
 {
     protected $rule = [
-        'type_name' => 'require',
+        'car_model_name' => 'require',
     ];
 
     protected $message = [
-        'type_name.require' => '类型名不能为空',
+        'car_model_name.require' => '型号不能为空',
     ];
 }

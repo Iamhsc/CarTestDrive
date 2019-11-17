@@ -1,8 +1,9 @@
+<?php /*a:1:{s:68:"/vagrant/phpwebsite/CarTestDrive/application/admin/view/car/add.html";i:1573978613;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
-    <title>添加车辆类型</title>
+    <title>添加车辆</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -19,9 +20,32 @@
                     <form class="layui-form" action="" lay-filter="component-form-element">
                         <div class="layui-row layui-col-space10 layui-form-item">
                             <div class="layui-col-lg6">
-                                <label class="layui-form-label">类型名称：</label>
+                                <label class="layui-form-label">品牌：</label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="type_name" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                                    <select name="car_brand_id" lay-verify="required">
+                                        <option value="">请选择一个品牌</option>
+                                        <?php if(is_array($brand) || $brand instanceof \think\Collection || $brand instanceof \think\Paginator): if( count($brand)==0 ) : echo "" ;else: foreach($brand as $key=>$vo): ?>
+                                        <option value="<?php echo htmlentities($vo['brand_id']); ?>"><?php echo htmlentities($vo['brand_name']); ?></option>
+                                        <?php endforeach; endif; else: echo "" ;endif; ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-col-lg6">
+                                <label class="layui-form-label">汽车型号：</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="car_model_name" lay-verify="required" placeholder="请输入车牌号" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-col-lg6">
+                                <label class="layui-form-label">车牌号：</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="car_number" lay-verify="required" placeholder="请输入车牌号" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-col-lg6">
+                                <label class="layui-form-label">已使用：</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="car_age" lay-verify="required" placeholder="已使用的时间 以年为单位" autocomplete="off" class="layui-input">
                                 </div>
                             </div>
                         </div>
@@ -50,7 +74,7 @@
         var $ = layui.$
             ,form = layui.form;
         form.on('submit(component-form-element)', function(data){
-            $.post("{:url('car_type/add')}", data.field, function (res) {
+            $.post("<?php echo url('car/add'); ?>", data.field, function (res) {
                 if(0 == res.code) {
                     layer.msg(res.msg);
                     setTimeout(function () {
