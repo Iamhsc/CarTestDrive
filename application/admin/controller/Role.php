@@ -139,7 +139,7 @@ class Role extends Base
         $roleInfo = (new RoleModel())->getRoleInfoById($roleId)['data'];
 
         $tree = (new \app\admin\model\Node())->getNodesTree($roleId)['data'];
-
+        dump($tree);exit();
         $this->assign([
             'tree' => $tree,
             'role_info' => $roleInfo

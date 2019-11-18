@@ -12,6 +12,6 @@ class Index extends Controller
 
     public function hello($name = 'ThinkPHP5')
     {
-        return 'hello,' . $name;
+        return $this->fetch();
     }
 }
