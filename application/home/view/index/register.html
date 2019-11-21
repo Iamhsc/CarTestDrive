@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>注册</title>
+    {include file="common/link"}
+</head>
+<body>
+{include file="common/header"}
+<div class="layui-container fly-marginTop">
+    <div class="fly-panel fly-panel-user" pad20>
+        <div class="layui-tab layui-tab-brief" lay-filter="user">
+            <ul class="layui-tab-title">
+                <li><a href="/home/index/login">登入</a></li>
+                <li class="layui-this">注册</li>
+            </ul>
+            <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
+                <div class="layui-tab-item layui-show">
+                    <div class="layui-form layui-form-pane">
+                        <form method="post">
+                            <div class="layui-form-item">
+                                <label for="L_email" class="layui-form-label">你的邮箱</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" id="L_email" placeholder="将会成为您唯一的登入名" name="member_email" required lay-verify="email" autocomplete="off" class="layui-input">
+                                </div>
+                                <input type="button" class="layui-btn" value="发送验证码" onclick="sendCode(this)"/>
+                                <span id="email-tip" style="color:red"></span>
+                            </div>
+                            <div class="layui-form-item">
+                                <label for="L_username" class="layui-form-label">用户名</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" id="L_username" name="username" required lay-verify="required" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label for="L_pass" class="layui-form-label">密码</label>
+                                <div class="layui-input-inline">
+                                    <input type="password" id="L_pass" name="pass" required lay-verify="required" autocomplete="off" class="layui-input">
+                                </div>
+                                <div class="layui-form-mid layui-word-aux">6到16个字符</div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label for="L_repass" class="layui-form-label">确认密码</label>
+                                <div class="layui-input-inline">
+                                    <input type="password" id="L_repass" name="password" required lay-verify="required" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label for="L_vercode" class="layui-form-label">人类验证</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" id="L_vercode" name="vercode" required lay-verify="required"
+                                           placeholder="请输入收到的验证码" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <button class="layui-btn" lay-filter="member-register-submit" lay-submit>立即注册</button>
+                            </div>
+                            <!--<div class="layui-form-item fly-form-app">-->
+                                <!--<span>或者直接使用社交账号快捷注册</span>-->
+                                <!--<a href="" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-qq" title="QQ登入"></a>-->
+                                <!--<a href="" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-weibo" title="微博登入"></a>-->
+                            <!--</div>-->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{include file="common/footer"}
+<script>
+    layui.use(['form'], function () {
+        let $ = layui.$
+            , form = layui.form;
+        form.on('submit(member-register-submit)', function (data) {
+            console.log('ss',data);
+            $.post("{:url('index/doRegister')}", data.field, function (res) {
+                console.log('ss', res);
+                if (0 == res.code) {
+                    // 成功的提示与跳转
+                    layer.msg('注册成功', {
+                        offset: '45px'
+                        , icon: 1
+                        , time: 1000
+                    }, function () {
+                        setTimeout(function() {
+                            location.href = 'login'; //登录
+                        }, 1000)
+                    });
+                } else {
+                    layer.msg(res.msg, {anim: 6});
+                    $("#code").click();
+                }
+            }, 'json');
+            return false;
+        });
+    });
+    var wait=60;
+    function sendCode(obj) {
+        let email=document.getElementById('L_email').value;
+        if (email=='')
+            layer.msg('请输入邮箱', {offset: '145px', icon: 2, time: 1000});return;
+        obj.value='正在发送验证码';
+        let $=layui.$;
+        $.post("{:url('index/sendCode')}", {'email':email}, function (res) {
+                if(res.code) {
+                    let em=document.getElementById('email-tip');
+                    em.innerText=res.msg;
+                    em.style.color='green';
+                    time(obj);
+                }
+                else{
+                    document.getElementById('email-tip').innerText=res.msg;
+                    obj.value = "获取验证码";
+                }
+            }, 'json');
+    }
+
+    function time(o) {
+        let $=layui.$;
+        if (wait == 0) {
+            $(o).attr('class','layui-btn');
+            o.value = "获取验证码";
+            wait = 60;
+        } else {
+            o.value = wait + "秒后重新发送";
+            $(o).attr('class','layui-btn layui-btn-disabled');
+            wait--;
+            setTimeout(function() {
+                time(o)
+            }, 1000)
+        }
+    }
+</script>
+</body>
+</html>

@@ -55,7 +55,7 @@ class Login extends Controller
 
             $log->writeLoginLog($param['username'], 1);
 
-            return reMsg(0, url('index/index'), '登录成功');
+            return reMsg(0, url('home/home'), '登录成功');
         }
     }
 
@@ -64,6 +64,6 @@ class Login extends Controller
         session('admin_user_name', null);
         session('admin_user_id', null);
 
-        $this->redirect(url('login/index'));
+        $this->redirect(url('login/home'));
     }
 }

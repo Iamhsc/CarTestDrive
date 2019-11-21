@@ -9,7 +9,7 @@
 // | Author: yunwuxin <448901948@qq.com>
 // +----------------------------------------------------------------------
 
-Route::get('captcha/[:id]', "\\think\\captcha\\CaptchaController@index");
+Route::get('captcha/[:id]', "\\think\\captcha\\CaptchaController@home");
 
 Validate::extend('captcha', function ($value, $id = '') {
     return captcha_check($value, $id);

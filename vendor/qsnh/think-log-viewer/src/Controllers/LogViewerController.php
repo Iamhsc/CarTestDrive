@@ -25,7 +25,7 @@ class LogViewerController extends Controller
 			'query' => request()->param(),
 		])->render();
 
-		return view(dirname(__FILE__) . '/../Views/index.html', compact('files', 'default', 'data', 'paginator'));
+		return view(dirname(__FILE__) . '/../Views/home.html', compact('files', 'default', 'data', 'paginator'));
 	}
 
 }

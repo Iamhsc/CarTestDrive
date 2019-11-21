@@ -68,9 +68,9 @@ class Member extends Base
                 return ['code' => -1, 'data' => '', 'msg' => $validate->getError()];
             }
             if (empty($param['password'])||$param['password']=='')
-                $param['password'] = makePassword($param['password']);
-            else
                 unset($param['password']);//密码为空则不更新密码
+            else
+                $param['password'] = makePassword($param['password']);
             unset($param['username']);//用户名不允许更改
             $res = $m->editMember($param);
             return json($res);

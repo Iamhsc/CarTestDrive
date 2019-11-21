@@ -33,6 +33,10 @@ class Member extends Model
         return modelReMsg(0,$ls,'ok');
     }
 
+    public function login($param){
+        return self::where(['member_email'=>$param['email'],'is_del'=>0,'status'=>1])->find();
+    }
+
     /**
      * 获取单个会员信息
      * @param $id
@@ -53,13 +57,17 @@ class Member extends Model
     public function addMember($data){
         $count=self::where('username',$data['username'])->count();
         if ($count>0)
-            return modelReMsg(-1, '', '该会员已存在');
+            return modelReMsg(-1, '', '该会员名已存在');
         $id=self::save($data);
         if ($id)
             return modelReMsg(0, '', '添加会员成功');
         return modelReMsg(-1, '', '添加会员失败');
     }
 
+    /**
+     * @param $data
+     * @return array
+     */
     public  function editMember($data){
         $edit = self::save($data,['member_id'=>$data['member_id']]);
         if ($edit)
@@ -75,6 +83,11 @@ class Member extends Model
      */
     public function updateStatus($id,$val){
         return self::save(['status'  => $val],['member_id' => $id]);
+    }
+
+    public function updateLoginTime($id){
+        $this->autoWriteTimestamp=false;
+        return self::save(['last_login_time'  => strtotime(date("H:i:s",time()))],['member_id' => $id]);
     }
 
     /**

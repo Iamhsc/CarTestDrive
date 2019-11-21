@@ -20,4 +20,9 @@ class CaptchaController
         $captcha = new Captcha((array) Config::pull('captcha'));
         return $captcha->entry($id);
     }
+
+    public function home($id=""){
+        $captcha = new Captcha((array) Config::pull('captcha'));
+        return $captcha->entry($id);
+    }
 }

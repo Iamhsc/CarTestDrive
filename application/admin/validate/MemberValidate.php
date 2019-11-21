@@ -34,6 +34,6 @@ class MemberValidate extends Validate
     ];
 
     protected $scene = [
-        'edit' => ['username', 'real_name', 'member_mobile', 'member_id_number']
+        'edit' => ['real_name', 'member_mobile', 'member_id_number']
     ];
 }

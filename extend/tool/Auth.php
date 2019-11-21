@@ -17,9 +17,9 @@ class Auth
 
     // 跳过权限检测的
     private $skipAuthMap = [
-        'login/index' => 1,
-        'index/index' => 1,
-        'index/home' => 1
+        'login/home' => 1,
+        'home/home' => 1,
+        'home/home' => 1
     ];
 
     public static function instance()
