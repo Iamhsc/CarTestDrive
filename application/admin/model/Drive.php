@@ -46,6 +46,13 @@ class Drive extends Model
         return modelReMsg(0,$ls,'ok');
     }
 
+    public function add($data){
+        $id=self::save($data);
+        if ($id)
+            return modelReMsg(1, '', '成功');
+        return modelReMsg(0, '', '失败');
+    }
+
     public function delOrder($id){
         return self::save(['is_del'  => 1],['drive_id' => $id]);
     }

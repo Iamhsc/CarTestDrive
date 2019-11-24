@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>试驾</title>
+    {include file="common/link"}
+</head>
+<body>
+{include file="common/header"}
+<div class="layui-container fly-marginTop">
+    <div class="fly-panel fly-panel-user" pad20>
+        <div class="layui-tab layui-tab-brief" lay-filter="user">
+            <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
+                <div class="layui-tab-item layui-show">
+                    <div class="layui-form layui-form-pane">
+                        <form method="post">
+                            <div class="layui-inline layui-form-item">
+                                <label class="layui-form-label">使用汽车</label>
+                                <div class="layui-input-inline">
+                                    <input type="hidden" name="car_id" value="{$car_info[0]}">
+                                    <input type="text" class="layui-input" value="{$car_info[1]}">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">开始时间</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" class="layui-input" name="begin_time" id="begin_time" placeholder="yyyy-MM-dd HH:mm:ss">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">还车时间</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" class="layui-input" name="end_time" id="end_time" placeholder="yyyy-MM-dd HH:mm:ss">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">单选框</label>
+                                <div class="layui-input-block">
+                                    <input type="radio" lay-filter="radio" name="use_type" value="1" title="试驾">
+                                    <input type="radio" lay-filter="radio" name="use_type" value="2" title="试乘"
+                                           checked="">
+                                </div>
+                            </div>
+                            <div class="hide-form"></div>
+                            <div class="layui-form-item">
+                                <button class="layui-btn" lay-filter="component-form-element" lay-submit>立即登录</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="common/footer"}
+<script src="/static/common/js/layTool.js"></script>
+<script>
+    layui.use(['form', 'laydate'], function () {
+        let $ = layui.$
+            , form = layui.form
+            , laydate = layui.laydate;
+
+        //日期时间选择器
+        laydate.render({
+            elem: '#begin_time'
+            , type: 'datetime'
+        });
+        laydate.render({
+            elem: '#end_time'
+            , type: 'datetime'
+        });
+
+        form.on('radio(radio)', function (data) {
+            console.log(data.value); //被点击的radio的value值
+            if (data.value === '1'&& $('#driver').length === 0) {
+                $.post("{:url('service/driver')}", data.field, function (res) {
+                    console.log('ss', res);
+                    if (res.code) {
+                        let html = "";
+                        html += "<div id='driver' class='layui-inline layui-form-item'>";
+                        html += "<label class='layui-form-label'>驾驶证</label>";
+                        html += "<div class='layui-input-inline'>";
+                        html += "<input class='layui-input' value='"+res.data.driver_type+"' name='driver_license' id='driver_license'>";
+                        html += "<img class='layui-upload-img' style='width: 190px;' src='"+res.data.photo+"' id='photo_upload'>";
+                        html += "</div>";
+                        html += "</div>";
+                        $('.hide-form').append(html);
+                    } else {
+                        layTool.open("/home/service/add", "添加驾驶证", '50%', '80%');
+                    }
+                }, 'json');
+
+            } else if (data.value === '2'&& $('#driver').length === 1) {
+                $('#driver').remove();
+            }
+        });
+
+        form.on('submit(component-form-element)', function (data) {
+            console.log(data.field);
+            $.post("{:url('service/drive')}", data.field, function (res) {
+                console.log('ss', res);
+                if (res.code) {
+                    layer.msg('用车成功', {
+                        offset: '145px'
+                        , icon: 1
+                        , time: 1000
+                    }, function () {
+                        location.href = '/home/member';
+                    });
+                } else {
+                    layer.msg(res.msg, {anim: 6});
+                }
+            }, 'json');
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

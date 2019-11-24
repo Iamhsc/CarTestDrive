@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加驾驶证</title>
+    {include file="common/link"}
+</head>
+<body>
+<div class="layui-container fly-marginTop">
+    <div class="fly-panel fly-panel-user" pad20>
+        <div class="layui-tab layui-tab-brief" lay-filter="user">
+            <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
+                <div class="layui-tab-item layui-show">
+                    <div class="layui-form layui-form-pane">
+                        <form method="post">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">驾驶证编号</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" class="layui-input" name="driver_number" placeholder="0123523412">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">申请机关</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" class="layui-input" name="apply_place" placeholder="北京市交警大队">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">申请时间</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" class="layui-input" id="apply_date" name="apply_date" placeholder="yyyy-MM-dd">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">到期时间</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" class="layui-input" id="expiry_date" name="expiry_date" placeholder="yyyy-MM-dd">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">准驾车型</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" class="layui-input" name="driver_type" placeholder="C1">
+                                </div>
+                            </div>
+                            <input id="photo" name="photo" type="hidden">
+                            <div class="layui-inline layui-form-item">
+                                <label class="layui-form-label">照片</label>
+                                <div class="layui-input-inline">
+                                    <img class="layui-upload-img" style="width: 190px;height: 40px;background: #1a9581;"
+                                         src="/static/images/driver_license.jpg" id="photo_upload">
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <button class="layui-btn" lay-filter="driver-license-add" lay-submit>提交</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/static/layui/layui.js"></script>
+<script>
+    layui.use(['upload', 'form','laydate'], function () {
+        var $ = layui.jquery
+            , upload = layui.upload
+            ,laydate=layui.laydate
+            , form = layui.form;
+        laydate.render({
+            elem: '#apply_date'
+        });
+
+        laydate.render({
+            elem: '#expiry_date'
+        });
+
+        upload.render({
+            elem: '#photo_upload'
+            , url: '/home/service/upload'
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#photo_upload').attr('src', result); //图片链接（base64）
+                });
+                $('#photo_upload').css('height', 'auto');
+            }
+            , done: function (res) {
+                if (res.code) {
+                    $('#photo').val(res.data.src);
+                }
+                layer.msg(res.msg);
+            }
+        });
+
+        form.on('submit(driver-license-add)', function (data) {
+            console.log(data.field);
+            $.post("{:url('service/add')}", data.field, function (res) {
+                if (res.code) {
+                    layer.msg(res.msg);
+                    setTimeout(function () {
+                        var index = parent.layer.getFrameIndex(window.name);
+                        let html = "";
+                        html += "<div id='driver' class='layui-inline layui-form-item'>";
+                        html += "<label class='layui-form-label'>驾驶证</label>";
+                        html += "<div class='layui-input-inline'>";
+                        html += "<input class='layui-input' value='"+data.field.driver_type+"' name='driver_license' id='driver_license'>";
+                        html += "<img class='layui-upload-img' style='width: 190px;' src='"+data.field.photo+"' id='photo_upload'>";
+                        html += "</div>";
+                        html += "</div>";
+                        parent.layui.$('.hide-form').append(html);
+                        parent.layer.close(index);
+                    }, 200);
+                } else {
+                    layer.alert(res.msg, {
+                        'title': '添加错误',
+                        'icon': 2
+                    });
+                }
+            }, 'json');
+            return false;
+        });
+
+    });
+</script>
+</body>
+</html>

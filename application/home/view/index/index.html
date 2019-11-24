@@ -2,40 +2,104 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>用户主页</title>
+    <title>HOME</title>
     {include file="common/link"}
     <style>
-        #LAY_demo3{width: 100%}
-        #LAY_demo3 img{width: 33.1%}
+        body{font-family: "Microsoft YaHei", "SimSun", '\5b8b\4f53', sans-serif;  -moz-user-select:none;
+            -webkit-user-select: none;
+            -ms-user-select: none;     }
+        .w1200{width: 1200px; margin:0 auto;}
+        .commodity-content .commod-cont-wrap{background: #f8f8f8; padding: 50px 0 90px 0;}
+        .commodity-content .commod-cont .left-nav{width: 200px; line-height: 38px; background: #fff; float: left; margin-right: 58px;}
+        .commodity-content .commod-cont .left-nav .list-box{border:1px solid #eeeeee;}
+        .commodity-content .commod-cont .left-nav .title{color: #fff; font-size: 16px; background: #333333; text-align: center;}
+        .commodity-content .commod-cont .left-nav .list-box dt,.commodity-content .commod-cont .left-nav .list-box dd{border-bottom:1px dashed #eeeeee; cursor: pointer;}
+        .commodity-content .commod-cont .left-nav .list-box dd:hover a{color:#ff5500;}
+        .commodity-content .commod-cont .left-nav .list-box dt{font-size: 14px; color: #333; padding-left: 30px; background: url(/static/images/off-icon.png) 8px -2px no-repeat; cursor: pointer;}
+        .commodity-content .commod-cont .left-nav .list-box dt.active{background-position: 8px -40px;}
+        .commodity-content .commod-cont .left-nav .list-box dd a{padding-left: 42px; color: #888888;}
+        .commodity-content .commod-cont .left-nav .list-box dl:last-child dd:last-child{border-bottom: 0;}
+        .commodity-content .commod-cont .right-cont-wrap{float:  left; width: 940px;}
+        .commodity-content .commod-cont .right-cont{width: 1000px;}
+        .commodity-content .commod-cont .right-cont .sort a{width: 58px; height: 26px; line-height: 26px; font-size: 14px; color: #333333; border:1px solid #eaeaea; margin-left: -1px; float: left; background: #fff; background:#fff url(/static/images/sort-arrow.png) no-repeat 41px 0; text-indent: 9px;}
+        .commodity-content .commod-cont .right-cont .cont-list .item{float: left; width: 280px; height: 366px; border:1px solid #eaeaea; background: #fff; margin:0 47px 60px 0;}
+        .commodity-content .commod-cont .right-cont .cont-list .item .img{border-bottom: 1px solid #eaeaea;}
+        .commodity-content .commod-cont .right-cont .cont-list .item .text{padding:14px 0 0 14px;}
+        .commodity-content .commod-cont .right-cont .cont-list .title{color: #333333; font-size: 16px; margin-bottom: 14px;}
+        .commodity-content .commod-cont .right-cont .cont-list .op{position: relative;}
+        .commodity-content .commod-cont .right-cont .cont-list .t-use{position: absolute; right: 13px;}
     </style>
 </head>
 <body style="margin-top: 65px;">
 {include file="common/header"}
-<div class="layui-container">
-    <div class="layui-row layui-col-space15">
-        <div class="fly-panel">
-            <h1>可使用汽车</h1>
-            <div class="site-demo-flow" id="LAY_demo3">
-                <img src="https://gw.alicdn.com/bao/uploaded/i2/701696736/TB2PNl5ahQa61Bjy0FhXXaalFXa_!!701696736.jpg_400x400q90.jpg?t=1574348196732">
-                <img src="https://gw.alicdn.com/bao/uploaded/i2/162734861/TB2V5rsX_gc61BjSZFkXXcTkFXa_!!162734861.jpg_400x400q90.jpg?t=1574348196732">
-                <img src="https://gw.alicdn.com/bao/uploaded/i4/69476562/TB2htq4XTka61BjSszfXXXN8pXa_!!69476562.jpg_400x400q90.jpg?t=1574348196732">
-                <img src="https://gw.alicdn.com/bao/uploaded/i1/180558071/TB2sy6jXMQc61BjSZFGXXa1DFXa_!!180558071.jpg_400x400q90.jpg?t=1574348196732">
-                <img src="https://gw.alicdn.com/bao/uploaded/i2/701696736/TB2PNl5ahQa61Bjy0FhXXaalFXa_!!701696736.jpg_400x400q90.jpg?t=1574348196732">
-                <img src="https://gw.alicdn.com/bao/uploaded/i3/285892163/TB2qu2HX9Zb61BjSZPfXXaU.pXa_!!285892163.jpg_400x400q90.jpg?t=1574348196732">
-                <img src="https://gw.alicdn.com/bao/uploaded/i2/704998060/TB2S.gAXTgc61BjSZFkXXcTkFXa_!!704998060.jpg_400x400q90.jpg?t=1574348196732">
-                <img src="https://gw.alicdn.com/bao/uploaded/i3/117202952/TB25lckX_AX61Bjy0FcXXaSlFXa_!!117202952.jpg_400x400q90.jpg?t=1574348196732">
-                <img src="https://gw.alicdn.com/bao/uploaded/i2/162734861/TB2qijoX9Zb61BjSZPfXXaU.pXa_!!162734861.jpg_400x400q90.jpg?t=1574348196732">
-                <img src="https://gw.alicdn.com/bao/uploaded/i3/96216586/TB2S7EfXHMc61BjSZFFXXaDLFXa_!!96216586.jpg_400x400q90.jpg?t=1574348196732">
-                <img src="https://gw.alicdn.com/bao/uploaded/i8/TB1jSSFNFXXXXcoXFXXYXGcGpXX_M2.SS2_400x400q90.jpg?t=1574348196732">
-                <img src="https://gw.alicdn.com/bao/uploaded/i2/162734861/TB2ylbsX37c61BjSZFKXXb6hFXa_!!162734861.jpg_400x400q90.jpg?t=1574348196732">
-                <img src="https://gw.alicdn.com/bao/uploaded/i2/117202952/TB2FdyZajUd61BjSZPcXXc6hXXa_!!117202952.jpg_400x400q90.jpg?t=1574348196732">
-                <img src="https://gw.alicdn.com/bao/uploaded/i4/777105914/TB2t.qbXZwb61Bjy0FfXXXvlpXa_!!777105914.jpg_400x400q90.jpg?t=1574348196732">
-                <img src="https://gw.alicdn.com/bao/uploaded/i4/TB1XzupNFXXXXcpXXXXXXXXXXXX_!!0-item_pic.jpg_400x400q90.jpg?t=1574348196732">
+<!-- banner部分 -->
+<!--<div>-->
+    <!--<div class="layui-carousel" id="banner">-->
+        <!--<div carousel-item="">-->
+            <!--<div>-->
+                <!--<img src="/static/images/banner1.jpg">-->
+                <!--<div class="panel">-->
+                    <!--<p class="title">汽车试驾</p>-->
+                    <!--<p>完美体验</p>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div>-->
+                <!--<img src="/static/images/banner2.jpg">-->
+                <!--<div class="panel">-->
+                    <!--<p class="title">汽车试乘</p>-->
+                    <!--<p>舒适享受</p>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<!-- main部分 -->
+<div class="commodity-content">
+    <div class="commod-cont-wrap">
+        <div class="commod-cont w1200 layui-clear">
+            <div class="left-nav">
+                <div class="title">所有分类</div>
+                <div class="list-box">
+                    <dl>
+                        <!--<dt>小汽车</dt>-->
+                        {foreach $brand_ls as $key=>$vo }
+                        <dd onclick="select({$vo.brand_id})"><a href="javascript:;">{$vo.brand_name}</a></dd>
+                        {/foreach}
+                    </dl>
+                </div>
+            </div>
+            <div class="right-cont-wrap">
+                <div class="right-cont">
+                    <div class="cont-list layui-clear" id="list-cont">
+                        {foreach car_ls as $key=>$vo }
+                        <div class="item">
+                        <div class="img">
+                            <a href="javascript:;"><img src="/static/images/paging.jpg"></a>
+                        </div>
+                        <div class="text">
+                            <p class="title">{$vo.brand_name} {$vo.car_model_name}</p>
+                        </div>
+                        <p class="op">
+                            <a href="/home/service/drive/car_id/{$vo.car_model_id}/car/{$vo.brand_name}{$vo.car_model_name}" class="t-use">去用车</a>
+                        </p>
+                    </div>
+                        {/foreach}
+
+                    </div>
+                    <div id="demo0" style="text-align: center;"></div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 {include file="common/footer"}
+<script src="/static/home/mods/index.js"></script>
+<script src="/static/common/js/layTool.js"></script>
+<script>
+    function select(obj) {
+        console.log(obj);
+        location.href='/home/index/index?car_brand_id='+obj;
+    }
+</script>
 </body>
 </html>

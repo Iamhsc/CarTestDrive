@@ -13,9 +13,9 @@ Route::get('think', function () {
     return 'hello,ThinkPHP5!';
 });
 
-Route::get('hello/:name', 'home/hello');
+Route::get('hello/:name', 'index/hello');
 
-Route::get('/admin/log/system', 'Qsnh\Think\Log\Controllers\LogViewerController@home');
+Route::get('/admin/log/system', 'Qsnh\Think\Log\Controllers\LogViewerController@index');
 
 return [
 

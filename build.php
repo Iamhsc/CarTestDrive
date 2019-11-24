@@ -19,7 +19,7 @@ return [
         '__dir__'    => ['behavior', 'controller', 'model', 'view'],
         'controller' => ['Index', 'Test', 'UserType'],
         'model'      => ['Member', 'UserType'],
-        'view'       => ['home/home'],
+        'view'       => ['index/index'],
     ],
 
     // 其他更多的模块定义

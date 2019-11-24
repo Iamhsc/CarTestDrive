@@ -124,10 +124,12 @@
                     <div class="layui-form-item">
                         <div class="avatar-add">
                             <p>建议尺寸168*168，支持jpg、png、gif，最大不能超过50KB</p>
-                            <button type="button" class="layui-btn upload-img">
+                            <form>
+                            <button type="button" id="upload_avatar" style="position:absolute; left:50%; top:35px; margin:0 0 0 -56px;" class="layui-btn">
                                 <i class="layui-icon">&#xe67c;</i>上传头像
                             </button>
-                            <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
+                            <img src="{$member['avatar']}">
+                            </form>
                             <span class="loading"></span>
                         </div>
                     </div>
@@ -192,9 +194,38 @@
 </div>
 {include file="common/footer"}
 <script>
-    layui.use(['form'], function(){
+    layui.use(['form','upload'], function() {
         var $ = layui.$
-            ,form = layui.form;
+            , upload=layui.upload
+            , form = layui.form;
+
+        var avatarAdd = $('.avatar-add');
+        var uploadInst = upload.render({
+            elem: '#upload_avatar'
+            ,url: 'upload'
+            ,before: function(obj){
+                console.log(obj);
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    console.log(result);
+                    $('#upload_avatar img').attr('src', result);
+                });
+                avatarAdd.find('.loading').show();
+            }
+            ,done: function(res){
+                console.log(res);
+                layer.msg(res.msg, {icon: 5});
+                avatarAdd.find('.loading').hide();
+                if (res.code){
+                    location.reload();
+                }
+            }
+            ,error: function(){
+                avatarAdd.find('.loading').hide();
+            }
+        });
+
+        //资料修改
         form.on('submit(member-info-update)', function(data){
             console.log('s',data);
             $.post("{:url('edit')}", data.field, function (res) {
@@ -209,6 +240,8 @@
             }, 'json');
             return false;
         });
+
+        //密码修改
         form.on('submit(member-password-update)', function(data){
             console.log('s',data);
             $.post("{:url('reSetPassword')}", data.field, function (res) {

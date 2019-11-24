@@ -35,6 +35,36 @@ class Member extends Base
         return $this->assign('member',$member)->fetch();
     }
 
+
+    public function upload(){
+        $file = request()->file('file');
+
+        // 移动到框架应用根目录/public/uploads/ 目录下
+        if($file){
+            $info = $file->validate(['size'=>15678,'ext'=>'jpg,png,gif'])
+                ->rule('uniqid')
+                ->move('../public/uploads/avatar');
+            if($info){
+                $path='/uploads/avatar/'.$info->getSaveName();
+                $model=new \app\admin\model\Member();
+                $res=$model->editMember(['avatar'=>$path,'member_id'=>session('member_id')]);
+                // 成功上传后 获取上传信息
+                if ($res['code']==0){
+                    session('avatar') ? unlink('../public/'.session('avatar')):'';
+                    usleep(100);//延迟100毫秒，等待删完在执行下一句
+                    session('avatar',$path);
+                    return ['code'=>1,'data'=>['src'=>$path],'msg'=>'上传成功'];}
+                else
+                    unlink('../public/'.$path);//没存到数据库就删除新上传的文件
+            }else{
+                // 上传失败获取错误信息
+                return ['code'=>0,'data'=>'','msg'=>'上传失败,'.$file->getError()];
+            }
+            return ['code'=>0,'data'=>'','msg'=>'上传失败'];
+        }
+        return ['code'=>0,'data'=>'','msg'=>'请选择文件'];
+    }
+
     /**
      * 修改密码
      * @return array|\think\response\Json

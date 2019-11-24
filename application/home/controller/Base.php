@@ -19,6 +19,7 @@ class Base extends Controller
             $this->redirect(url('index/login'));
         } else {
             $this->assign([
+                'avatar'    => session('avatar'),
                 'real_name' => session('real_name'),
                 'member_id' => session('member_id')
             ]);

@@ -2,16 +2,32 @@
 
 namespace app\home\controller;
 
-use think\App;
+use app\admin\model\Car;
+use app\admin\model\CarBrand;
 use think\Controller;
 
 class Index extends Controller
 {
     public function index()
     {
+        $limit='6,1';
+        $where=[];
+        $where[] = ['m.is_del','=',0];
+        $param=$this->request->param();
+        if (isset($param['car_brand_id']))
+            $where[] = ['m.car_brand_id', '=', $param['car_brand_id']];
+
+        if (isset($param['limit']))
+            $limit = input('param.limit');
+
+        $brand=new CarBrand();
+        $car=new Car();
         $this->assign([
+            'avatar'    => session('avatar'),
             'real_name' => session('real_name'),
-            'member_id' => session('member_id')
+            'member_id' => session('member_id'),
+            'brand_ls'  => $brand->getCarBrandList()['data'],
+            'car_ls'       => $car->getCarList($limit,$where)['data']
         ]);
         return $this->fetch();
     }
@@ -27,6 +43,7 @@ class Index extends Controller
     }
 
     public function logout(){
+        session('avatar',null);
         session('username', null);
         session('member_id', null);
         session('real_name', null);
@@ -75,6 +92,7 @@ class Index extends Controller
                 return reMsg(-3, '', '用户名密码错误');
             }
             // 设置session标识状态
+            session('avatar',$info['avatar']);
             session('username', $info['username']);
             session('member_id', $info['member_id']);
             session('real_name', $info['real_name']);
