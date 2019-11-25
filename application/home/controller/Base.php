@@ -15,15 +15,17 @@ class Base extends Controller
 {
     public function initialize()
     {
-        if (empty(session('username'))) {
+        if (empty(session('member_id'))) {
             $this->redirect(url('index/login'));
         } else {
             $this->assign([
-                'avatar'    => session('avatar'),
-                'real_name' => session('real_name'),
-                'member_id' => session('member_id')
+                'member_info'=> session('member_info'),
             ]);
         }
 
+    }
+
+    public function uid(){
+        return session('member_id');
     }
 }

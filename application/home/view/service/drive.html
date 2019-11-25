@@ -24,13 +24,7 @@
                             <div class="layui-form-item">
                                 <label class="layui-form-label">开始时间</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" class="layui-input" name="begin_time" id="begin_time" placeholder="yyyy-MM-dd HH:mm:ss">
-                                </div>
-                            </div>
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">还车时间</label>
-                                <div class="layui-input-inline">
-                                    <input type="text" class="layui-input" name="end_time" id="end_time" placeholder="yyyy-MM-dd HH:mm:ss">
+                                    <input type="text" disabled class="layui-input" name="begin_time" id="begin_time" placeholder="yyyy-MM-dd HH:mm:ss">
                                 </div>
                             </div>
                             <div class="layui-form-item">
@@ -43,7 +37,7 @@
                             </div>
                             <div class="hide-form"></div>
                             <div class="layui-form-item">
-                                <button class="layui-btn" lay-filter="component-form-element" lay-submit>立即登录</button>
+                                <button class="layui-btn" lay-filter="component-form-element" lay-submit>提交</button>
                             </div>
                         </form>
                     </div>
@@ -64,10 +58,7 @@
         laydate.render({
             elem: '#begin_time'
             , type: 'datetime'
-        });
-        laydate.render({
-            elem: '#end_time'
-            , type: 'datetime'
+            , value:new Date()
         });
 
         form.on('radio(radio)', function (data) {

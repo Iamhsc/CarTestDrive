@@ -74,13 +74,17 @@
                         {foreach car_ls as $key=>$vo }
                         <div class="item">
                         <div class="img">
-                            <a href="/home/service/drive/car_id/{$vo.car_model_id}/car/{$vo.brand_name}{$vo.car_model_name}"><img src="/static/images/paging.jpg"></a>
+                            <a href="javascript:;"><img src="/static/images/paging.jpg"></a>
                         </div>
                         <div class="text">
                             <p class="title">{$vo.brand_name} {$vo.car_model_name}</p>
                         </div>
                         <p class="op">
+                            {if condition="($vo.status)"}
+                            <span style="color: #FD482C" class="t-use">使用中</span>
+                            {else}
                             <a href="/home/service/drive/car_id/{$vo.car_model_id}/car/{$vo.brand_name}{$vo.car_model_name}" class="t-use">去用车</a>
+                            {/if}
                         </p>
                     </div>
                         {/foreach}

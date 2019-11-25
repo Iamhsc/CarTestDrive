@@ -10,7 +10,7 @@ class Index extends Controller
 {
     public function index()
     {
-        $limit='6,1';
+        $limit=6;
         $where=[];
         $where[] = ['m.is_del','=',0];
         $param=$this->request->param();
@@ -23,9 +23,7 @@ class Index extends Controller
         $brand=new CarBrand();
         $car=new Car();
         $this->assign([
-            'avatar'    => session('avatar'),
-            'real_name' => session('real_name'),
-            'member_id' => session('member_id'),
+            'member_info'    => session('member_info'),
             'brand_ls'  => $brand->getCarBrandList()['data'],
             'car_ls'       => $car->getCarList($limit,$where)['data']
         ]);
@@ -43,10 +41,8 @@ class Index extends Controller
     }
 
     public function logout(){
-        session('avatar',null);
-        session('username', null);
+        session('member_info',null);
         session('member_id', null);
-        session('real_name', null);
         $this->redirect(url('login'));
     }
 
@@ -92,10 +88,8 @@ class Index extends Controller
                 return reMsg(-3, '', '用户名密码错误');
             }
             // 设置session标识状态
-            session('avatar',$info['avatar']);
-            session('username', $info['username']);
             session('member_id', $info['member_id']);
-            session('real_name', $info['real_name']);
+            session('member_info',$info);
             // 维护上次登录时间
             $model->updateLoginTime($info['member_id']);
             return reMsg(0, '/home/member', '登录成功');

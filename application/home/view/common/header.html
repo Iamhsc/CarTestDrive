@@ -7,7 +7,7 @@
     <ul class="layui-nav fly-nav-user">
 
       <!-- 未登入的状态 -->
-      {if condition="(empty($member_id))"}
+      {if condition="(empty($member_info['member_id']))"}
       <li class="layui-nav-item">
         <a class="iconfont icon-touxiang layui-hide-xs" href="/home/index/login"></a>
       </li>
@@ -17,20 +17,13 @@
       <li class="layui-nav-item">
         <a href="/home/index/register">注册</a>
       </li>
-      <!--<li class="layui-nav-item layui-hide-xs">-->
-        <!--<a href="" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" title="QQ登入" class="iconfont icon-qq"></a>-->
-      <!--</li>-->
-      <!--<li class="layui-nav-item layui-hide-xs">-->
-        <!--<a href="" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" title="微博登入" class="iconfont icon-weibo"></a>-->
-      <!--</li>-->
       {else /}
       <!-- 登入后的状态 -->
       <li class="layui-nav-item">
         <a class="fly-nav-avatar" href="javascript:;">
-          <cite class="layui-hide-xs">{$real_name}</cite>
-          <i class="iconfont icon-renzheng layui-hide-xs" title="认证信息：layui 作者"></i>
-          <i class="layui-badge fly-badge-vip layui-hide-xs">VIP3</i>
-          <img src="{$avatar}">
+          <cite class="layui-hide-xs">{$member_info['real_name']}</cite>
+          <i class="iconfont icon-renzheng layui-hide-xs" title="认证信息"></i>
+          <img src="{$member_info['avatar']}">
         </a>
         <dl class="layui-nav-child">
           <dd><a href="/home/member/edit"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>

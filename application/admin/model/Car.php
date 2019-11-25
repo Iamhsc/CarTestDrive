@@ -82,6 +82,10 @@ class Car extends Model
         return modelReMsg(-1, '', '修改失败');
     }
 
+    public function setStatus($id){
+        return self::update(['status'=>1],['car_model_id'=>$id]);
+    }
+
     /**
      * 删除车辆
      * @param $id

@@ -8,19 +8,26 @@
 
 namespace app\home\controller;
 
-
 use app\admin\validate\MemberValidate;
 use think\Validate;
 
 class Member extends Base
 {
     public function index(){
+        $model=new \app\admin\model\Member();
+        $info=$model->getMemberById($this->uid());
+        $limit=[10,1];
+        $where=[];
+        $where[] = ['m.member_id', '=', $this->uid()];
+        $model=new \app\admin\model\Drive();
+        $ls=$model->getDriveOrderList($limit,$where);
+        $this->assign(['member_info'=>$info,'drive'=>$ls['data']]);
         return $this->fetch();
     }
 
     public function edit(){
         $m=new \app\admin\model\Member();
-        $uid=session('member_id');
+        $uid=$this->uid();
         if(request()->isPost()) {
             $param = input('post.');
             $validate = new MemberValidate();
@@ -47,7 +54,7 @@ class Member extends Base
             if($info){
                 $path='/uploads/avatar/'.$info->getSaveName();
                 $model=new \app\admin\model\Member();
-                $res=$model->editMember(['avatar'=>$path,'member_id'=>session('member_id')]);
+                $res=$model->editMember(['avatar'=>$path,'member_id'=>$this->uid()]);
                 // 成功上传后 获取上传信息
                 if ($res['code']==0){
                     session('avatar') ? unlink('../public/'.session('avatar')):'';
@@ -84,7 +91,7 @@ class Member extends Base
             if (!$validate->check($param)) {
                 return ['code' => -1, 'data' => '', 'msg' => $validate->getError()];
             }
-            $uid=session('member_id');
+            $uid=$this->uid();
             $info=$m->getMemberById($uid);
             if (!checkPassword($param['nowpass'],$info['password']))
                 return ['code' => -1, 'data' => '', 'msg' => '原密码不正确'];
@@ -98,8 +105,7 @@ class Member extends Base
             $res = $m->editMember($data);
             if ($res['code']===0){
                 session('member_id',null);
-                session('real_name',null);
-                session('username',null);
+                session('member_info',null);
             }
             return json($res);
         }
