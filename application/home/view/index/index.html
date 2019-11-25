@@ -58,7 +58,7 @@
     <div class="commod-cont-wrap">
         <div class="commod-cont w1200 layui-clear">
             <div class="left-nav">
-                <div class="title">所有分类</div>
+                <div class="title">所有品牌</div>
                 <div class="list-box">
                     <dl>
                         <!--<dt>小汽车</dt>-->
@@ -74,7 +74,7 @@
                         {foreach car_ls as $key=>$vo }
                         <div class="item">
                         <div class="img">
-                            <a href="javascript:;"><img src="/static/images/paging.jpg"></a>
+                            <a href="/home/service/drive/car_id/{$vo.car_model_id}/car/{$vo.brand_name}{$vo.car_model_name}"><img src="/static/images/paging.jpg"></a>
                         </div>
                         <div class="text">
                             <p class="title">{$vo.brand_name} {$vo.car_model_name}</p>

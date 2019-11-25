@@ -100,8 +100,10 @@
     var wait=60;
     function sendCode(obj) {
         let email=document.getElementById('L_email').value;
-        if (email=='')
-            layer.msg('请输入邮箱', {offset: '145px', icon: 2, time: 1000});return;
+        if (email==''){
+            layer.msg('请输入邮箱', {offset: '145px', icon: 2, time: 1000});
+            return;
+        }
         obj.value='正在发送验证码';
         let $=layui.$;
         $.post("{:url('index/sendCode')}", {'email':email}, function (res) {
