@@ -11,6 +11,7 @@ namespace app\home\controller;
 
 use app\admin\model\Car;
 use app\admin\model\Drive;
+use app\home\AddDriverLicenseValidate;
 use app\home\model\DriverLicense;
 
 class Service extends Base
@@ -71,6 +72,10 @@ class Service extends Base
     {
         if (request()->isPost()) {
             $param = input('post.');
+            $validate = new AddDriverLicenseValidate();
+            if(!$validate->check($param)) {
+                return ['code' => 0, 'data' => '', 'msg' => $validate->getError()];
+            }
             $param['member_id'] = $this->uid();
             if (isset($param['file']))
                 unset($param['file']);
