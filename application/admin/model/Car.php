@@ -52,7 +52,7 @@ class Car extends Model
      * @return float|string
      */
     public function getCountByBrandId($brand_id){
-        return self::where('car_brand_id',$brand_id)->count();
+        return self::where(['car_brand_id'=>$brand_id,'is_del'=>0])->count();
     }
 
     /**

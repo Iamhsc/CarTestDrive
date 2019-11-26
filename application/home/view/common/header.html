@@ -23,7 +23,7 @@
         <a class="fly-nav-avatar" href="javascript:;">
           <cite class="layui-hide-xs">{$member_info['real_name']}</cite>
           <i class="iconfont icon-renzheng layui-hide-xs" title="认证信息"></i>
-          <img src="{$member_info['avatar']}">
+          <img src="{$member_info['avatar']?$member_info['avatar']:'/static/images/avatar/default.png'}">
         </a>
         <dl class="layui-nav-child">
           <dd><a href="/home/member/edit"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>

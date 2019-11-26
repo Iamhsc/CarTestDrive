@@ -49,7 +49,7 @@ class Drive extends Model
             ->join('car_brand cb','cm.car_brand_id = cb.brand_id','RIGHT')
             ->where('d.is_del',0)
             ->where($where)
-            ->field('d.drive_id,d.order_number,m.real_name,cb.brand_name,cm.car_model_id,cm.car_model_name,d.begin_time,d.use_type,d.status')
+            ->field('d.drive_id,d.order_number,m.real_name,cb.brand_name,cm.car_model_id,cm.car_model_name,d.driver_license,d.begin_time,d.use_type,d.status')
             ->paginate($limit);
         return modelReMsg(0,$ls,'ok');
     }

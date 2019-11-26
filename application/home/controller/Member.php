@@ -57,9 +57,10 @@ class Member extends Base
                 $res=$model->editMember(['avatar'=>$path,'member_id'=>$this->uid()]);
                 // 成功上传后 获取上传信息
                 if ($res['code']==0){
-                    session('avatar') ? unlink('../public/'.session('avatar')):'';
+                    $avatar=session('member_info')['avatar'];
+                    $avatar ? unlink('../public/'.$avatar):'';
                     usleep(100);//延迟100毫秒，等待删完在执行下一句
-                    session('avatar',$path);
+                    session('member_info.avatar',$path);
                     return ['code'=>1,'data'=>['src'=>$path],'msg'=>'上传成功'];}
                 else
                     unlink('../public/'.$path);//没存到数据库就删除新上传的文件

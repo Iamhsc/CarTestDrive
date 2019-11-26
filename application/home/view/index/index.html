@@ -58,7 +58,7 @@
     <div class="commod-cont-wrap">
         <div class="commod-cont w1200 layui-clear">
             <div class="left-nav">
-                <div class="title">所有品牌</div>
+                <div  onclick="select(0)" class="title">所有品牌</div>
                 <div class="list-box">
                     <dl>
                         <!--<dt>小汽车</dt>-->
@@ -102,7 +102,10 @@
 <script>
     function select(obj) {
         console.log(obj);
-        location.href='/home/index/index?car_brand_id='+obj;
+        if (obj===0)
+            location.href='/';
+        else
+            location.href='/home/index/index?car_brand_id='+obj;
     }
 </script>
 </body>

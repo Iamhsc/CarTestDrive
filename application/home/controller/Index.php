@@ -87,12 +87,19 @@ class Index extends Controller
             if (!checkPassword($param['password'], $info['password'])) {
                 return reMsg(-3, '', '用户名密码错误');
             }
+            $url='/home/member';
+            $msg='登录成功';
+            if (empty($info['real_name'])) {
+                $url = '/home/member/edit';
+                $msg ='登陆成功，请完善你的资料';
+            }
+
             // 设置session标识状态
             session('member_id', $info['member_id']);
             session('member_info',$info);
             // 维护上次登录时间
             $model->updateLoginTime($info['member_id']);
-            return reMsg(0, '/home/member', '登录成功');
+            return reMsg(0, $url, $msg);
         }
     }
 

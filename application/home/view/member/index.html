@@ -8,7 +8,7 @@
 <body style="margin-top: 65px;">
 {include file="common/header"}
 <div class="fly-home fly-panel" style="background-image: url();">
-    <img src="{$member_info['avatar']}" alt="{$member_info['real_name']}">
+    <img src="{$member_info['avatar']?$member_info['avatar']:'/static/images/avatar/default.png'}" alt="{$member_info['real_name']}">
     <i class="iconfont icon-renzheng" title="认证"></i>
     <h1>
         {$member_info['real_name']}

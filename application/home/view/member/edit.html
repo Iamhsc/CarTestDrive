@@ -128,7 +128,7 @@
                             <button type="button" id="upload_avatar" style="position:absolute; left:50%; top:35px; margin:0 0 0 -56px;" class="layui-btn">
                                 <i class="layui-icon">&#xe67c;</i>上传头像
                             </button>
-                            <img src="{$member['avatar']}">
+                            <img src="{$member_info['avatar']?$member_info['avatar']:'/static/images/avatar/default.png'}">
                             </form>
                             <span class="loading"></span>
                         </div>
@@ -224,7 +224,14 @@
             console.log('s',data);
             $.post("{:url('edit')}", data.field, function (res) {
                 if(0 == res.code) {
-                    layer.msg(res.msg);
+                    layer.msg(res.msg,{
+                        offset: '145px'
+                        , icon: 1
+                        , time: 1000
+                    }, function () {
+                        location.href = '/';
+                    });
+
                 } else {
                     layer.alert(res.msg, {
                         'title': '修改失败',

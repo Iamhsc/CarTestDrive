@@ -19,7 +19,8 @@
                 <div class="layui-inline">
                     <label class="layui-form-label">搜索</label>
                     <div class="layui-input-block">
-                        <input type="text" name="real_name" placeholder="请输入使用者姓名" autocomplete="off" class="layui-input">
+                        <input type="text" name="real_name" placeholder="请输入使用者姓名" autocomplete="off"
+                               class="layui-input">
                     </div>
                 </div>
                 <div class="layui-inline">
@@ -33,6 +34,14 @@
         <div class="layui-card-body">
             <table id="LAY-drive-model-table" lay-filter="LAY-drive-model-table"></table>
             <script type="text/html" id="table-seller-drive-model">
+                {{#  if(d.use_type==1){ }}
+                <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="show"><i
+                        class="layui-icon layui-icon-picture"></i></a>
+                {{#  } }}
+                {{# if(d.use_type==2){ }}
+                <a class="layui-btn layui-btn-disabled layui-btn-xs"><i
+                        class="layui-icon layui-icon-picture"></i></a>
+                {{# } }}
                 {if (buttonAuth('drive/del'))}
                 <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i
                         class="layui-icon layui-icon-delete"></i>删除</a>
@@ -73,10 +82,10 @@
     // 渲染表格
     function renderTable() {
         layTool.table("#LAY-drive-model-table", "/admin/drive/index", [
-            [ {
+            [{
                 field: "order_number",
                 title: "订单号",
-            },{
+            }, {
                 field: "real_name",
                 title: "使用者",
             }, {
@@ -88,16 +97,16 @@
             }, {
                 field: "use_type",
                 title: "使用类型",
-                templet:function (d) {
+                templet: function (d) {
                     return d.use_type == 1 ? '<span style="color: #FD482C">试驾</span>' : '<span style="color: #0000FF">试乘</span>'
                 }
-            },{
+            }, {
                 field: "begin_time",
                 title: "开始时间",
             }, {
                 field: "status",
                 title: "使用状态",
-                templet:function (d) {
+                templet: function (d) {
                     return d.status == 1 ? '<span style="color:#00FF00;">使用中</span>' : '<span style="color: #1a9581">已结束</span>'
                 }
             }, {
@@ -116,7 +125,6 @@
             table.on("tool(LAY-drive-model-table)",
                 function (e) {
                     if ("del" === e.event) {
-
                         layer.ready(function () {
                             var index = layer.confirm('您确定要删除该型号？', {
                                 title: '友情提示',
@@ -137,6 +145,18 @@
 
                             });
                         });
+                    } else if ("show" === e.event) {
+                        let img=new Image();
+                        img.src=e.data.driver_license;
+                        setTimeout(function () {
+                            layer.open({
+                                type: 1,
+                                title: '驾驶证',
+                                shade: 0.2,
+                                area: [img.width, img.height+44],
+                                content: '<img src="'+e.data.driver_license+'">',
+                            });
+                        },200);
                     }
                 });
         });

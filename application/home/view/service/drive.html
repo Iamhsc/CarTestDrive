@@ -71,8 +71,9 @@
                         html += "<div id='driver' class='layui-inline layui-form-item'>";
                         html += "<label class='layui-form-label'>驾驶证</label>";
                         html += "<div class='layui-input-inline'>";
-                        html += "<input class='layui-input' value='"+res.data.driver_type+"' name='driver_license' id='driver_license'>";
-                        html += "<img class='layui-upload-img' style='width: 190px;' src='"+res.data.photo+"' id='photo_upload'>";
+                        html += "<input class='layui-input' value='"+res.data.driver_type+"' id='driver_license'>";
+                        html += "<img class='layui-upload-img' name='driver_license' style='width: 190px;' src='"+res.data.photo+"' id='photo_upload'>";
+                        html += "<input name='driver_license' value='"+res.data.photo+"' type='hidden'>";
                         html += "</div>";
                         html += "</div>";
                         $('.hide-form').append(html);
