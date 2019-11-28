@@ -22,10 +22,11 @@ class Index extends Controller
 
         $brand=new CarBrand();
         $car=new Car();
+        $cars=$car->getCarList($limit,$where)['data'];
         $this->assign([
             'member_info'    => session('member_info'),
             'brand_ls'  => $brand->getCarBrandList()['data'],
-            'car_ls'       => $car->getCarList($limit,$where)['data']
+            'car_ls'       =>$cars
         ]);
         return $this->fetch();
     }

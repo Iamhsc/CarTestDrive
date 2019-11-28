@@ -48,7 +48,7 @@ class Member extends Base
 
         // 移动到框架应用根目录/public/uploads/ 目录下
         if($file){
-            $info = $file->validate(['size'=>15678,'ext'=>'jpg,png,gif'])
+            $info = $file->validate(['ext'=>'jpg,png'])
                 ->rule('uniqid')
                 ->move('../public/uploads/avatar');
             if($info){

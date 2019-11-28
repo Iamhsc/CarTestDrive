@@ -15,7 +15,7 @@ return [
     // 服务器地址
     'hostname'        => '192.168.33.11',
     // 数据库名
-    'database'        => 'snake',
+    'database'        => 'car_test_drive',
     // 用户名
     'username'        => 'imhsc',
     // 密码

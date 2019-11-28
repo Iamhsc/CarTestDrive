@@ -5,60 +5,131 @@
     <title>HOME</title>
     {include file="common/link"}
     <style>
-        body{font-family: "Microsoft YaHei", "SimSun", '\5b8b\4f53', sans-serif;  -moz-user-select:none;
+        body {
+            font-family: "Microsoft YaHei", "SimSun", '\5b8b\4f53', sans-serif;
+            -moz-user-select: none;
             -webkit-user-select: none;
-            -ms-user-select: none;     }
-        .w1200{width: 1200px; margin:0 auto;}
-        .commodity-content .commod-cont-wrap{background: #f8f8f8; padding: 50px 0 90px 0;}
-        .commodity-content .commod-cont .left-nav{width: 200px; line-height: 38px; background: #fff; float: left; margin-right: 58px;}
-        .commodity-content .commod-cont .left-nav .list-box{border:1px solid #eeeeee;}
-        .commodity-content .commod-cont .left-nav .title{color: #fff; font-size: 16px; background: #333333; text-align: center;}
-        .commodity-content .commod-cont .left-nav .list-box dt,.commodity-content .commod-cont .left-nav .list-box dd{border-bottom:1px dashed #eeeeee; cursor: pointer;}
-        .commodity-content .commod-cont .left-nav .list-box dd:hover a{color:#ff5500;}
-        .commodity-content .commod-cont .left-nav .list-box dt{font-size: 14px; color: #333; padding-left: 30px; background: url(/static/images/off-icon.png) 8px -2px no-repeat; cursor: pointer;}
-        .commodity-content .commod-cont .left-nav .list-box dt.active{background-position: 8px -40px;}
-        .commodity-content .commod-cont .left-nav .list-box dd a{padding-left: 42px; color: #888888;}
-        .commodity-content .commod-cont .left-nav .list-box dl:last-child dd:last-child{border-bottom: 0;}
-        .commodity-content .commod-cont .right-cont-wrap{float:  left; width: 940px;}
-        .commodity-content .commod-cont .right-cont{width: 1000px;}
-        .commodity-content .commod-cont .right-cont .sort a{width: 58px; height: 26px; line-height: 26px; font-size: 14px; color: #333333; border:1px solid #eaeaea; margin-left: -1px; float: left; background: #fff; background:#fff url(/static/images/sort-arrow.png) no-repeat 41px 0; text-indent: 9px;}
-        .commodity-content .commod-cont .right-cont .cont-list .item{float: left; width: 280px; height: 366px; border:1px solid #eaeaea; background: #fff; margin:0 47px 60px 0;}
-        .commodity-content .commod-cont .right-cont .cont-list .item .img{border-bottom: 1px solid #eaeaea;}
-        .commodity-content .commod-cont .right-cont .cont-list .item .text{padding:14px 0 0 14px;}
-        .commodity-content .commod-cont .right-cont .cont-list .title{color: #333333; font-size: 16px; margin-bottom: 14px;}
-        .commodity-content .commod-cont .right-cont .cont-list .op{position: relative;}
-        .commodity-content .commod-cont .right-cont .cont-list .t-use{position: absolute; right: 13px;}
+            -ms-user-select: none;
+        }
+
+        .w1200 {
+            width: 1200px;
+            margin: 0 auto;
+        }
+
+        .commodity-content .commod-cont-wrap {
+            background: #f8f8f8;
+            padding: 50px 0 90px 0;
+        }
+
+        .commodity-content .commod-cont .left-nav {
+            width: 200px;
+            line-height: 38px;
+            background: #fff;
+            float: left;
+            margin-right: 58px;
+        }
+
+        .commodity-content .commod-cont .left-nav .list-box {
+            border: 1px solid #eeeeee;
+        }
+
+        .commodity-content .commod-cont .left-nav .title {
+            color: #fff;
+            font-size: 16px;
+            background: #333333;
+            text-align: center;
+        }
+
+        .commodity-content .commod-cont .left-nav .list-box dt, .commodity-content .commod-cont .left-nav .list-box dd {
+            border-bottom: 1px dashed #eeeeee;
+            cursor: pointer;
+        }
+
+        .commodity-content .commod-cont .left-nav .list-box dd:hover a {
+            color: #ff5500;
+        }
+
+        .commodity-content .commod-cont .left-nav .list-box dt {
+            font-size: 14px;
+            color: #333;
+            padding-left: 30px;
+            background: url(/static/images/off-icon.png) 8px -2px no-repeat;
+            cursor: pointer;
+        }
+
+        .commodity-content .commod-cont .left-nav .list-box dd a {
+            padding-left: 42px;
+            color: #888888;
+        }
+
+        .commodity-content .commod-cont .left-nav .list-box dl:last-child dd:last-child {
+            border-bottom: 0;
+        }
+
+        .commodity-content .commod-cont .right-cont-wrap {
+            float: left;
+            width: 940px;
+        }
+
+        .commodity-content .commod-cont .right-cont {
+            width: 1000px;
+        }
+
+        .commodity-content .commod-cont .right-cont .sort a {
+            width: 58px;
+            height: 26px;
+            line-height: 26px;
+            font-size: 14px;
+            color: #333333;
+            border: 1px solid #eaeaea;
+            margin-left: -1px;
+            float: left;
+            background: #fff;
+            background: #fff url(/static/images/sort-arrow.png) no-repeat 41px 0;
+            text-indent: 9px;
+        }
+
+        .commodity-content .commod-cont .right-cont .cont-list .item {
+            float: left;
+            width: 280px;
+            height: 285px;
+            border: 1px solid #eaeaea;
+            background: #fff;
+            margin: 0 47px 60px 0;
+        }
+
+        .commodity-content .commod-cont .right-cont .cont-list .item .img {
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .commodity-content .commod-cont .right-cont .cont-list .item .text {
+            padding: 14px 0 0 14px;
+        }
+
+        .commodity-content .commod-cont .right-cont .cont-list .title {
+            color: #333333;
+            font-size: 16px;
+        }
+
+        .commodity-content .commod-cont .right-cont .cont-list .op {
+            position: relative;
+        }
+
+        .commodity-content .commod-cont .right-cont .cont-list .t-use {
+            position: absolute;
+            right: 13px;
+        }
     </style>
 </head>
 <body style="margin-top: 65px;">
 {include file="common/header"}
-<!-- banner部分 -->
-<!--<div>-->
-    <!--<div class="layui-carousel" id="banner">-->
-        <!--<div carousel-item="">-->
-            <!--<div>-->
-                <!--<img src="/static/images/banner1.jpg">-->
-                <!--<div class="panel">-->
-                    <!--<p class="title">汽车试驾</p>-->
-                    <!--<p>完美体验</p>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div>-->
-                <!--<img src="/static/images/banner2.jpg">-->
-                <!--<div class="panel">-->
-                    <!--<p class="title">汽车试乘</p>-->
-                    <!--<p>舒适享受</p>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
 <!-- main部分 -->
 <div class="commodity-content">
     <div class="commod-cont-wrap">
         <div class="commod-cont w1200 layui-clear">
             <div class="left-nav">
-                <div  onclick="select(0)" class="title">所有品牌</div>
+                <div onclick="select(0)" class="title">所有品牌</div>
                 <div class="list-box">
                     <dl>
                         <!--<dt>小汽车</dt>-->
@@ -73,20 +144,27 @@
                     <div class="cont-list layui-clear" id="list-cont">
                         {foreach car_ls as $key=>$vo }
                         <div class="item">
-                        <div class="img">
-                            <a href="javascript:;"><img src="/static/images/paging.jpg"></a>
+                            <div class="img">
+                                {if condition="($vo.status)"}
+                                <a href="javascript:;"><img src="{$vo.image}"
+                                                            alt="{$vo.brand_name}-{$vo.car_model_name}"></a>
+                                {else}
+                                <a href="/home/service/drive/car_id/{$vo.car_model_id}/car/{$vo.brand_name}{$vo.car_model_name}"><img src="{$vo.image}"
+                                                            alt="{$vo.brand_name}-{$vo.car_model_name}"></a>
+                                {/if}
+                            </div>
+                            <div class="text">
+                                <span class="title">{$vo.brand_name}-{$vo.car_model_name}</span>
+                            </div>
+                            <p class="op">
+                                {if condition="($vo.status)"}
+                                <span style="color: #FD482C" class="t-use">使用中</span>
+                                {else}
+                                <a href="/home/service/drive/car_id/{$vo.car_model_id}/car/{$vo.brand_name}{$vo.car_model_name}"
+                                   class="t-use">去用车</a>
+                                {/if}
+                            </p>
                         </div>
-                        <div class="text">
-                            <p class="title">{$vo.brand_name} {$vo.car_model_name}</p>
-                        </div>
-                        <p class="op">
-                            {if condition="($vo.status)"}
-                            <span style="color: #FD482C" class="t-use">使用中</span>
-                            {else}
-                            <a href="/home/service/drive/car_id/{$vo.car_model_id}/car/{$vo.brand_name}{$vo.car_model_name}" class="t-use">去用车</a>
-                            {/if}
-                        </p>
-                    </div>
                         {/foreach}
 
                     </div>
@@ -102,10 +180,14 @@
 <script>
     function select(obj) {
         console.log(obj);
-        if (obj===0)
-            location.href='/';
+        if (obj === 0)
+            location.href = '/';
         else
-            location.href='/home/index/index?car_brand_id='+obj;
+            location.href = '/home/index/index?car_brand_id=' + obj;
+    }
+    function u(obj) {
+        console.log(obj)
+        // .bind("click");
     }
 </script>
 </body>

@@ -91,7 +91,7 @@ class Service extends Base
     {
         $file = request()->file('file');
         if ($file) {
-            $info = $file->validate(['size' => 156780, 'ext' => 'jpg,png,gif'])
+            $info = $file->validate(['ext' => 'jpg,png'])
                 ->rule('uniqid')
                 ->move('../public/uploads/driver');
             if ($info) {

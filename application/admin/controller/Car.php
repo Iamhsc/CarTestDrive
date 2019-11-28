@@ -18,19 +18,20 @@ class Car extends Base
      * @return mixed|\think\response\Json
      * @throws \think\exception\DbException
      */
-    public function index(){
+    public function index()
+    {
         if (request()->isAjax()) {
             $limit = input('param.limit');
             $car_model_name = input('param.car_model_name');
 
-            $where=[];
-            $where[] = ['m.is_del','=',0];
+            $where = [];
+            $where[] = ['m.is_del', '=', 0];
             if (!empty($car_model_name)) {
-                $where[] = ['m.car_model_name', 'like', '%'.$car_model_name.'%'];
+                $where[] = ['m.car_model_name', 'like', '%' . $car_model_name . '%'];
             }
-            $model=new \app\admin\model\Car();
-            $ls=$model->getCarList($limit,$where);
-            if ($ls['code']===0)
+            $model = new \app\admin\model\Car();
+            $ls = $model->getCarList($limit, $where);
+            if ($ls['code'] === 0)
                 return json(['code' => 0, 'msg' => 'ok', 'count' => $ls['data']->total(), 'data' => $ls['data']->all()]);
             else
                 return json(['code' => 0, 'msg' => 'ok', 'count' => 0, 'data' => []]);
@@ -43,27 +44,30 @@ class Car extends Base
      * @return mixed|\think\response\Json
      * @throws \think\exception\DbException
      */
-    public function add(){
-        if(request()->isPost()) {
+    public function add()
+    {
+        if (request()->isPost()) {
             $param = input('post.');
-            $model=new \app\admin\model\Car();
+            $model = new \app\admin\model\Car();
+            unset($param['file']);
             $res = $model->addCar($param);
             return json($res);
         }
-        $b=new \app\admin\model\CarBrand();
-        $brand=$b->getCarBrandList();
-        return $this->assign('brand',$brand['data'])->fetch();
+        $b = new \app\admin\model\CarBrand();
+        $brand = $b->getCarBrandList();
+        return $this->assign('brand', $brand['data'])->fetch();
     }
 
     /**
      * 删除车辆
      * @return \think\response\Json
      */
-    public function del(){
-        $param=$this->request->param();
-        $model=new \app\admin\model\Car();
-        $del=$model->delCar($param['id']);
-        if($del)
+    public function del()
+    {
+        $param = $this->request->param();
+        $model = new \app\admin\model\Car();
+        $del = $model->delCar($param['id']);
+        if ($del)
             return json(['code' => 0, 'msg' => '删了成功', 'count' => 0, 'data' => []]);
         return json(['code' => -1, 'msg' => '删了失败', 'count' => 0, 'data' => []]);
     }
@@ -75,20 +79,37 @@ class Car extends Base
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public function edit(){
-        $model=new \app\admin\model\Car();
-        if(request()->isPost()) {
+    public function edit()
+    {
+        $model = new \app\admin\model\Car();
+        if (request()->isPost()) {
             $param = input('post.');
             $validate = new CarValidate();
-            if(!$validate->check($param)) {
+            if (!$validate->check($param)) {
                 return ['code' => -1, 'data' => '', 'msg' => $validate->getError()];
             }
             $res = $model->editCar($param);
             return json($res);
         }
-        $car=$model->getCarById(input('param.id'));
-        $brand=new \app\admin\model\CarBrand();
-        $b=$brand->getCarBrandList();
-        return $this->assign(['car'=>$car,'brand'=>$b['data']])->fetch();
+        $car = $model->getCarById(input('param.id'));
+        $brand = new \app\admin\model\CarBrand();
+        $b = $brand->getCarBrandList();
+        return $this->assign(['car' => $car, 'brand' => $b['data']])->fetch();
+    }
+
+    public function upload()
+    {
+        $file = request()->file('file');
+        if ($file) {
+            $info = $file->validate(['ext' => 'jpg,png'])->move('../public/uploads/cars');
+            if ($info) {
+                $path = '/uploads/cars/' . $info->getSaveName();
+                return ['code' => 1, 'data' => ['src' => $path], 'msg' => '上传成功'];
+            } else {
+                // 上传失败获取错误信息
+                return ['code' => 0, 'data' => '', 'msg' => '上传失败,' . $file->getError()];
+            }
+        }
+        return ['code' => 0, 'data' => '', 'msg' => '请选择文件'];
     }
 }
