@@ -14,6 +14,7 @@ use think\Model;
 class CarBrand extends Model
 {
     protected $table="ctd_car_brand";
+    //自动写入时间戳
     protected $autoWriteTimestamp = true;
 
     /**

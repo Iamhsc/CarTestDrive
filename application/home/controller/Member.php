@@ -13,6 +13,13 @@ use think\Validate;
 
 class Member extends Base
 {
+    /**
+     * 个人主页
+     * @return mixed
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
     public function index(){
         $model=new \app\admin\model\Member();
         $info=$model->getMemberById($this->uid());
@@ -25,6 +32,13 @@ class Member extends Base
         return $this->fetch();
     }
 
+    /**
+     * 编辑会员信息
+     * @return array|mixed|\think\response\Json
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
     public function edit(){
         $m=new \app\admin\model\Member();
         $uid=$this->uid();
@@ -43,6 +57,10 @@ class Member extends Base
     }
 
 
+    /**
+     * 上传头像
+     * @return array
+     */
     public function upload(){
         $file = request()->file('file');
 

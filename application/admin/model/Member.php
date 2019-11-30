@@ -27,18 +27,33 @@ class Member extends Model
         return get_client_ip();
     }
 
+    /**
+     * 获取会员列表
+     * @param $limit
+     * @param $where
+     * @return array
+     * @throws \think\exception\DbException
+     */
     public function getMemberList($limit, $where){
         $ls=self::where($where)
             ->order('member_id', 'desc')->paginate($limit);
         return modelReMsg(0,$ls,'ok');
     }
 
+    /**
+     * 登录
+     * @param $param
+     * @return array|\PDOStatement|string|Model|null
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
     public function login($param){
         return self::where(['member_email'=>$param['email'],'is_del'=>0,'status'=>1])->find();
     }
 
     /**
-     * 获取单个会员信息
+     * 根据id获取单个会员信息
      * @param $id
      * @return array|\PDOStatement|string|Model|null
      * @throws \think\db\exception\DataNotFoundException
@@ -65,6 +80,7 @@ class Member extends Model
     }
 
     /**
+     * 编辑会员信息
      * @param $data
      * @return array
      */
@@ -85,6 +101,11 @@ class Member extends Model
         return self::save(['status'  => $val],['member_id' => $id]);
     }
 
+    /**
+     * 更新登陆时间
+     * @param $id
+     * @return bool
+     */
     public function updateLoginTime($id){
         $this->autoWriteTimestamp=false;
         return self::save(['last_login_time'  => strtotime(date("H:i:s",time()))],['member_id' => $id]);

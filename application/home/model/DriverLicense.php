@@ -26,6 +26,11 @@ class DriverLicense extends Model
         return self::where('member_id',$member_id)->find();
     }
 
+    /**
+     * 添加驾驶证
+     * @param $data
+     * @return array
+     */
     public function addDriverLicense($data){
         $id=self::save($data);
         if ($id)

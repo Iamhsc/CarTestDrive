@@ -11,7 +11,7 @@ namespace app\home\controller;
 
 use app\admin\model\Car;
 use app\admin\model\Drive;
-use app\home\AddDriverLicenseValidate;
+use app\home\validate\AddDriverLicenseValidate;
 use app\home\model\DriverLicense;
 
 class Service extends Base
@@ -87,6 +87,10 @@ class Service extends Base
         return $this->fetch();
     }
 
+    /**
+     * 上传驾驶证
+     * @return array
+     */
     public function upload()
     {
         $file = request()->file('file');

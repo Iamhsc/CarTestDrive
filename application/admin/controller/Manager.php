@@ -12,6 +12,11 @@ use app\admin\model\Admin;
 use app\admin\validate\AdminValidate;
 use tool\Log;
 
+/**
+ * 管理员控制器
+ * Class Manager
+ * @package app\admin\controller
+ */
 class Manager extends Base
 {
     // 管理员列表

@@ -8,6 +8,11 @@ use think\Controller;
 
 class Index extends Controller
 {
+    /**
+     * 首页
+     * @return mixed
+     * @throws \think\exception\DbException
+     */
     public function index()
     {
         $limit=6;
@@ -31,16 +36,27 @@ class Index extends Controller
         return $this->fetch();
     }
 
+    /**
+     * 会员登录页面
+     * @return mixed
+     */
     public function login()
     {
         return $this->fetch();
     }
 
+    /**
+     * 会员注册页面
+     * @return mixed
+     */
     public function register()
     {
         return $this->fetch();
     }
 
+    /**
+     * 会员注销（登出）
+     */
     public function logout(){
         session('member_info',null);
         session('member_id', null);
@@ -53,6 +69,10 @@ class Index extends Controller
         return $this->fetch();
     }
 
+    /**
+     * 会员注册处理
+     * @return array|bool|\think\response\Json
+     */
     public function doRegister()
     {
         if (request()->isPost()) {
@@ -71,6 +91,13 @@ class Index extends Controller
         }
     }
 
+    /**
+     * 会员登录处理
+     * @return \think\response\Json
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
     public function doLogin()
     {
         if (request()->isPost()) {
@@ -104,6 +131,11 @@ class Index extends Controller
         }
     }
 
+    /**
+     * 发送验证码
+     * @return array
+     * @throws \phpmailerException
+     */
     public function sendCode()
     {
         $param = input('post.');

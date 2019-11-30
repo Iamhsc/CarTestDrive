@@ -15,22 +15,40 @@ class Drive extends Model
 {
     protected $table='ctd_drive';
 
-    //开始使用时间格式化
+    /**
+     * 获取车辆开始使用时间格式化
+     * @param $value
+     * @return false|string
+     */
     public function getBeginTimeAttr($value)
     {
         return date('Y-m-d H:i', $value);
     }
 
-    //使用结束时间格式化
+    /**
+     * 获取车辆使用结束时间格式化
+     * @param $value
+     * @return false|string
+     */
     public function getEndTimeAttr($value)
     {
         return date('Y-m-d H:i', $value);
     }
 
+    /**
+     * 设置车辆开始使用时间格式化
+     * @param $value
+     * @return false|int
+     */
     public function setBeginTimeAttr($value){
         return strtotime($value);
     }
 
+    /**
+     * 设置辆使用结束时间格式化
+     * @param $val
+     * @return false|int
+     */
     public function setEndTimeAttr($val){
         return strtotime($val);
     }
@@ -54,6 +72,11 @@ class Drive extends Model
         return modelReMsg(0,$ls,'ok');
     }
 
+    /**
+     * 添加试驾试乘
+     * @param $data
+     * @return array
+     */
     public function add($data){
         $id=self::save($data);
         if ($id)
@@ -61,6 +84,11 @@ class Drive extends Model
         return modelReMsg(0, '', '失败');
     }
 
+    /**
+     * 删除试驾试乘（就是删除订单）
+     * @param $id
+     * @return bool
+     */
     public function delOrder($id){
         return self::save(['is_del'  => 1],['drive_id' => $id]);
     }

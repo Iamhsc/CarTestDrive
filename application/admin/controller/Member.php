@@ -7,10 +7,13 @@
  */
 
 namespace app\admin\controller;
-
-
 use app\admin\validate\MemberValidate;
 
+/**
+ * 会员控制器
+ * Class Member
+ * @package app\admin\controller
+ */
 class Member extends Base
 {
     /**
@@ -58,6 +61,13 @@ class Member extends Base
         return $this->fetch();
     }
 
+    /**
+     * 编辑会员
+     * @return array|mixed|\think\response\Json
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
     public function edit(){
         $m=new \app\admin\model\Member();
         $member=$m->getMemberById(input('param.id'));

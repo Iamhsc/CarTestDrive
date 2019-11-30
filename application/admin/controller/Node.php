@@ -12,9 +12,14 @@ use app\admin\model\Node as NodeModel;
 use app\admin\validate\NodeValidate;
 use tool\Log;
 
+/**
+ * 节点控制器
+ * Class Node
+ * @package app\admin\controller
+ */
 class Node extends Base
 {
-    // 节点列表
+    // 节点列表（就是获取后台菜单渲染到前台）
     public function index()
     {
         $node = new NodeModel();

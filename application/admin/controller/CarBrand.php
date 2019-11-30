@@ -11,6 +11,11 @@ namespace app\admin\controller;
 
 use app\admin\validate\CarBrandValidate;
 
+/**
+ * 汽车品牌控制器
+ * Class CarBrand
+ * @package app\admin\controller
+ */
 class CarBrand extends Base
 {
     /**

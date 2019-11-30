@@ -11,6 +11,11 @@ namespace app\admin\controller;
 
 use app\admin\validate\CarValidate;
 
+/**
+ * 汽车控制器
+ * Class Car
+ * @package app\admin\controller
+ */
 class Car extends Base
 {
     /**
@@ -97,6 +102,10 @@ class Car extends Base
         return $this->assign(['car' => $car, 'brand' => $b['data']])->fetch();
     }
 
+    /**
+     * 上传汽车图片（添加车辆时用到）
+     * @return array
+     */
     public function upload()
     {
         $file = request()->file('file');

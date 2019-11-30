@@ -125,53 +125,54 @@
 <body style="margin-top: 65px;">
 {include file="common/header"}
 <!-- main部分 -->
-<div class="commodity-content">
-    <div class="commod-cont-wrap">
-        <div class="commod-cont w1200 layui-clear">
-            <div class="left-nav">
-                <div onclick="select(0)" class="title">所有品牌</div>
-                <div class="list-box">
-                    <dl>
-                        <!--<dt>小汽车</dt>-->
-                        {foreach $brand_ls as $key=>$vo }
-                        <dd onclick="select({$vo.brand_id})"><a href="javascript:;">{$vo.brand_name}</a></dd>
-                        {/foreach}
-                    </dl>
-                </div>
-            </div>
-            <div class="right-cont-wrap">
-                <div class="right-cont">
-                    <div class="cont-list layui-clear" id="list-cont">
-                        {foreach car_ls as $key=>$vo }
-                        <div class="item">
-                            <div class="img">
-                                {if condition="($vo.status)"}
-                                <a href="javascript:;"><img src="{$vo.image}"
-                                                            alt="{$vo.brand_name}-{$vo.car_model_name}"></a>
-                                {else}
-                                <a href="/home/service/drive/car_id/{$vo.car_model_id}/car/{$vo.brand_name}{$vo.car_model_name}"><img src="{$vo.image}"
-                                                            alt="{$vo.brand_name}-{$vo.car_model_name}"></a>
-                                {/if}
-                            </div>
-                            <div class="text">
-                                <span class="title">{$vo.brand_name}-{$vo.car_model_name}</span>
-                            </div>
-                            <p class="op">
-                                {if condition="($vo.status)"}
-                                <span style="color: #FD482C" class="t-use">使用中</span>
-                                {else}
-                                <a href="/home/service/drive/car_id/{$vo.car_model_id}/car/{$vo.brand_name}{$vo.car_model_name}"
-                                   class="t-use">去用车</a>
-                                {/if}
-                            </p>
-                        </div>
-                        {/foreach}
-
+    <div class="commodity-content">
+        <div class="commod-cont-wrap">
+            <div class="commod-cont w1200 layui-clear">
+                <div class="left-nav">
+                    <div onclick="select(0)" class="title">所有品牌</div>
+                    <div class="list-box">
+                        <dl>
+                            <!--<dt>小汽车</dt>-->
+                            {foreach $brand_ls as $key=>$vo }
+                            <dd onclick="select({$vo.brand_id})"><a href="javascript:;">{$vo.brand_name}</a></dd>
+                            {/foreach}
+                        </dl>
                     </div>
-                    <div id="demo0" style="text-align: center;"></div>
+                </div>
+                <div class="right-cont-wrap">
+                    <div class="right-cont">
+                        <div class="cont-list layui-clear" id="list-cont">
+                            {foreach car_ls as $key=>$vo }
+                            <div class="item">
+                                <div class="img">
+                                    {if condition="($vo.status)"}
+                                    <a href="javascript:;"><img src="{$vo.image}"
+                                                                alt="{$vo.brand_name}-{$vo.car_model_name}"></a>
+                                    {else}
+                                    <a href="/home/service/drive/car_id/{$vo.car_model_id}/car/{$vo.brand_name}{$vo.car_model_name}"><img
+                                            src="{$vo.image}"
+                                            alt="{$vo.brand_name}-{$vo.car_model_name}"></a>
+                                    {/if}
+                                </div>
+                                <div class="text">
+                                    <span class="title">{$vo.brand_name}-{$vo.car_model_name}</span>
+                                </div>
+                                <p class="op">
+                                    {if condition="($vo.status)"}
+                                    <span style="color: #FD482C" class="t-use">使用中</span>
+                                    {else}
+                                    <a href="/home/service/drive/car_id/{$vo.car_model_id}/car/{$vo.brand_name}{$vo.car_model_name}"
+                                       class="t-use">去用车</a>
+                                    {/if}
+                                </p>
+                            </div>
+                            {/foreach}
+
+                        </div>
+                        <div id="demo0" style="text-align: center;"></div>
+                    </div>
                 </div>
             </div>
-        </div>
     </div>
 </div>
 {include file="common/footer"}
@@ -185,6 +186,7 @@
         else
             location.href = '/home/index/index?car_brand_id=' + obj;
     }
+
     function u(obj) {
         console.log(obj)
         // .bind("click");

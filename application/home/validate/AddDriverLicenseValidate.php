@@ -6,11 +6,16 @@
  * Time: 19:24
  */
 
-namespace app\home;
+namespace app\home\validate;
 
 
 use think\Validate;
 
+/**
+ * 添加驾驶证验证器
+ * Class AddDriverLicenseValidate
+ * @package app\home
+ */
 class AddDriverLicenseValidate extends Validate
 {
     protected $rule =   [

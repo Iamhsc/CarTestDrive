@@ -12,6 +12,10 @@ use think\Model;
 
 class Admin extends Model
 {
+    /**
+     * 指定表
+     * @var string
+     */
     protected $table = 'ctd_admin';
 
     /**

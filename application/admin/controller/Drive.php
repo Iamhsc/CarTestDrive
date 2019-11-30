@@ -8,7 +8,11 @@
 
 namespace app\admin\controller;
 
-
+/**
+ * 试驾试乘控制器
+ * Class Drive
+ * @package app\admin\controller
+ */
 class Drive extends Base
 {
     /**
@@ -35,6 +39,10 @@ class Drive extends Base
         return $this->fetch();
     }
 
+    /**
+     * 删除试驾试乘
+     * @return \think\response\Json
+     */
     public function del(){
         $param=$this->request->param();
         $model=new \app\admin\model\Drive();

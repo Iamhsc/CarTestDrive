@@ -14,6 +14,10 @@ use tool\Auth;
 
 class Index extends Base
 {
+    /**
+     * 后台框架（头部、左侧、底部）
+     * @return mixed
+     */
     public function index()
     {
         $authModel = new Auth();
@@ -26,6 +30,10 @@ class Index extends Base
         return $this->fetch();
     }
 
+    /**
+     * 后台首页
+     * @return mixed
+     */
     public function home()
     {
         $this->assign([
@@ -35,7 +43,11 @@ class Index extends Base
         return $this->fetch();
     }
 
-    // 修改密码
+
+    /**
+     * 修改管理员密码
+     * @return mixed|\think\response\Json
+     */
     public function editPwd()
     {
         if (request()->isPost()) {

@@ -13,6 +13,10 @@ use tool\Auth;
 
 class Base extends Controller
 {
+    /**
+     * 后台控制器基类初始化；（除了登录所有操作都经过这个方法）
+     * @return \think\response\Json|void
+     */
     public function initialize()
     {
         if(empty(session('admin_user_name'))){

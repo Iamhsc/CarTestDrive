@@ -11,6 +11,11 @@ namespace app\admin\controller;
 use app\admin\model\Role as RoleModel;
 use tool\Log;
 
+/**
+ * 角色控制器
+ * Class Role
+ * @package app\admin\controller
+ */
 class Role extends Base
 {
     // 角色列表

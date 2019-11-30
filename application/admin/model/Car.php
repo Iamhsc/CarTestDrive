@@ -13,10 +13,13 @@ use think\Model;
 
 class Car extends Model
 {
+    //指定表
     protected $table="ctd_car_model";
+    //自动写入时间戳
     protected $autoWriteTimestamp = true;
 
     /**
+     * 获取车辆列表
      * @param $limit
      * @param $where
      * @return array
@@ -82,12 +85,17 @@ class Car extends Model
         return modelReMsg(-1, '', '修改失败');
     }
 
+    /**
+     * 更新车辆状态
+     * @param $id
+     * @return Car
+     */
     public function setStatus($id){
         return self::update(['status'=>1],['car_model_id'=>$id]);
     }
 
     /**
-     * 删除车辆
+     * 删除车辆  （并非真正删除，只是把is_del标识为1）
      * @param $id
      * @return bool
      */

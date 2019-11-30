@@ -59,6 +59,7 @@ class Login extends Controller
         }
     }
 
+    //登出
     public function loginOut()
     {
         session('admin_user_name', null);
