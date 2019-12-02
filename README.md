@@ -1,9 +1,8 @@
 #试驾试乘管理系统
 
-基于ThinkPHP5.1框架及Layui2.5.4前端框架实现的一套带有权限管理的试驾试乘管理系统。  
+- 基于[snake](https://github.com/nick-bai/snake "snake")实现的试驾试乘管理系统。  
 
-- 所有页面数据的显示都通过model（模型）在数据库中获取，再经过controller（控制器）处理数据，最后渲染到页面中；  
-- 表单的提交通过AJAX以JSON的形式提交，经过控制器验证后再交由模型存到数据库
+- [snake](https://github.com/nick-bai/snake "snake")是thinkphp5.1 + layui 实现的带rbac的基础管理后台
 
 - 目录结构
 ````
@@ -43,19 +42,23 @@
 ###配置访问 
 ######1.把项目放到www目录
 ######2.修改配置文件vhosts.conf为
+
 ```xml
-<VirtualHost _default_:8088>
-DocumentRoot "你的项目位置\CarTestDrive\public"
-  <Directory "你的项目位置\CarTestDrive\public">
-    Options -Indexes +FollowSymLinks +ExecCGI
-    AllowOverride All
-    Order allow,deny
-    Allow from all
-    Require all granted
+<VirtualHost *:876>
+    DocumentRoot "E:\0000\XXX"
+    ServerName XXX.XXX.com   
+    ServerAlias 
+  <Directory "E:\0000\XXX">
+      Options FollowSymLinks ExecCGI
+      AllowOverride All
+      Order allow,deny
+      Allow from all
+     Require all granted
   </Directory>
 </VirtualHost>
 ```
-######3.浏览器输入你配置的域名进入首页；域名后面加/admin 即可进入后台    
+######3. 如果是本地，在C:\Windows\System32\drivers\etc\hosts 最后一行添加127.0.0.1       XXX.XXX.com
+######4.浏览器输入你配置的域名进入首页，如：http://local.web.com；域名后面加/admin 即可进入后台    
 
 默认用户名 密码  admin admin  
 用户注册
