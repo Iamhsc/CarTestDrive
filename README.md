@@ -57,7 +57,7 @@
   </Directory>
 </VirtualHost>
 ```
-######3. 如果是本地，在C:\Windows\System32\drivers\etc\hosts 最后一行添加127.0.0.1       XXX.XXX.com
+######3. 如果是本地，在C:\Windows\System32\drivers\etc\hosts 最后一行添加127.0.0.1       XXX.XXX.com  
 ######4.浏览器输入你配置的域名进入首页，如：http://local.web.com；域名后面加/admin 即可进入后台    
 
 默认用户名 密码  admin admin  
