@@ -39,21 +39,19 @@
         }
     </style>
 </head>
-<body style="margin-top: 65px;">
+<body>
 {include file="common/header"}
 <!-- main部分 -->
 <div class="layui-container fly-marginTop fly-user-main">
     <ul class="layui-nav layui-nav-tree layui-inline">
         <li class="layui-nav-item">
             <a href="/">
-                <i class="layui-icon">&#xe609;</i>
                 所有品牌
             </a>
         </li>
         {foreach $brand_ls as $key=>$vo }
         <li class="layui-nav-item">
             <a href="/home/index/index?car_brand_id={$vo.brand_id}">
-                <i class="layui-icon">&#xe620;</i>
                 {$vo.brand_name}
             </a>
         </li>
