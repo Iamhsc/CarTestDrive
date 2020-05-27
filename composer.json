@@ -21,7 +21,7 @@
         "topthink/think-captcha": "2.0.*",
         "qsnh/think-log-viewer": "^1.0",
         "zoujingli/ip2region": "^1.0",
-        "phpmailer/phpmailer": "^5.2"
+        "phpmailer/phpmailer": "^6.1"
     },
     "autoload": {
         "psr-4": {
